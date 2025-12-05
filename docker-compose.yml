@@ -1,0 +1,19 @@
+services:
+  telegram-aggregator:
+    build: .
+    container_name: telegram-aggregator
+    restart: unless-stopped
+    environment:
+      - API_ID=${API_ID}
+      - API_HASH=${API_HASH}
+      - PHONE_NUMBER=${PHONE_NUMBER}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - TARGET_CHAT_ID=${TARGET_CHAT_ID}
+      - SOURCE_CHATS=${SOURCE_CHATS}
+    volumes:
+      - ./sessions:/app/sessions
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
